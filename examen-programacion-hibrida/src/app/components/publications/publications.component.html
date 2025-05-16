@@ -1,0 +1,73 @@
+<ion-card>
+  <!--List which shows all Publications stored in local DB-->
+  <ion-list *ngFor="let p of publicationsList">
+    <ion-item>
+      <ion-img [src]="'data:image/jpeg;base64,' + p.image" style="height: 150px; max-width: 300px;"/>
+        <ion-card-header>
+          <ion-card-title style="font-size: 15px;"> {{p.title}} </ion-card-title>
+          <ion-card-subtitle style="font-size: 13px;"> {{p.date | date: 'yyyy/MM/dd'}} </ion-card-subtitle>
+        </ion-card-header>
+      <div style="margin-left:auto" slot="end">
+        <!--ion-button which fires off setModalPost() function with parameter true to open a modal.
+        Also fires off getPost() function with p parameter to collect the data of the post corresponding to it.
+        Modal shows full information of the post selected by user-->
+        <ion-button (click)="setModalPost(true)" (click)="getPost(p)">
+          <ion-icon icon="book-outline"/>
+        </ion-button>
+        <!--ion-button which fires off setModalConfirmation() function with parameter true to open a modal.
+        Also fires off getId() function with parameter p.id to collect the id of the post corresponding to it.
+        Modal shows a confirmation to the user if they want to delete selected post-->
+        <ion-button (click)="setModalConfirmation(true)" (click)="getId(p.id ?? 0)" slot="end">
+          <ion-icon icon="trash-outline"/>
+        </ion-button>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-card>
+
+<!--Read Modal which shows full information of selected post-->
+<ion-modal [isOpen]="modalPost" [backdropDismiss]="false" style="--height: auto; --width: auto">
+  <ng-template>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{modalPostPublication.title}}</ion-card-title>
+        <ion-card-subtitle>{{modalPostPublication.date | date: 'yyyy/MM/dd'}}</ion-card-subtitle>
+      </ion-card-header>
+      <img [src]="'data:image/jpeg;base64,' + modalPostPublication.image" style="height:225px; max-width:450px; margin-left: 15px; margin-right:15px"/>
+      <ion-card-content>
+        <ion-text color="dark">{{modalPostPublication.description}}</ion-text>
+      </ion-card-content>
+      <!--ion-button which fires off setModalPost() with parameter false to close Modal-->
+      <ion-button (click)="setModalPost(false)" style="margin-left:4%; margin-bottom:4%">Close</ion-button>
+    </ion-card>
+  </ng-template>
+</ion-modal>
+
+<!--Delete Modal which acts as a confirmation for the user for deletion of selected post-->
+<ion-modal [isOpen]="modalConfirmation" [backdropDismiss]="false" style="--height: auto; --width: auto">
+  <ng-template>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Delete this post?</ion-card-title>
+      </ion-card-header>
+      <ion-card-content> 
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <!--ion-button which fires off setModalConfirmation with paramter false to close Modal.
+              Also fires off deletePublicationButton() to delete selected post-->
+              <ion-button (click)="setModalConfirmation(false)" (click)="deletePublicationButton()" style="font-size: 12px">Yes</ion-button>
+            </ion-col>
+            <ion-col>
+              <!--ion-button which fires off setModalConfirmation() with false parameter to close Modal-->
+              <ion-button (click)="setModalConfirmation(false)" style="font-size: 12px">No</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+</ion-modal>
+
+
+

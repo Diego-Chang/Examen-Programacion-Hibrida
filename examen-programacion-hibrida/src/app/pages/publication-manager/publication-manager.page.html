@@ -1,0 +1,16 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!--Back button to return to home page-->
+      <ion-back-button [routerLink]="['/home']"/>
+    </ion-buttons>
+    <ion-title>New Post</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!--Calls for publication-manager-component.
+Receives onCreate event and fires off addPublication() function with parameter $event-->
+<ion-content [fullscreen]="true">
+  <app-publication-manager-component (onCreate)="addPublication($event)"/>
+</ion-content>
+

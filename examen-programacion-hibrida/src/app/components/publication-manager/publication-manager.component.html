@@ -1,0 +1,67 @@
+<ion-card lines="none">
+
+  <ion-item>
+    <!--Input for the title of the new post. Value stored in "title" property-->
+    <ion-input 
+      [(ngModel)]="title"
+      #titleInput = "ngModel"
+      type="string" 
+      required="required" 
+      label="Title" 
+      labelPlacement="stacked" 
+      minlength="5">
+    </ion-input>
+    <!--Error message for Input Title's invalidity-->
+    <ion-text 
+      [hidden]="titleInput.valid || titleInput.pristine"
+      color="danger">
+      Error! Title must have at least 5 characters.
+    </ion-text>
+  </ion-item>
+
+  <!--Component for photo mangement for the new post. 
+  ion-button fires takePhoto() method from Camera plugin, while the ion-img shows the image input from user-->
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button color="medium" (click)="takePhoto()">
+          <ion-icon icon="camera"/> Take Photo
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-img [src]="'data:image/jpeg;base64,' + image" style="height: 200px; width:auto"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <ion-item>
+    <!--Input for the description of the new post. Value stored in "description" property-->
+    <ion-input 
+      [(ngModel)]="description"
+      #descriptionInput = "ngModel"
+      type="string" 
+      required="required" 
+      label="Description" 
+      labelPlacement="stacked" 
+      minlength="20">
+    </ion-input>
+    <!--Error message for Description Input's invalidity-->
+    <ion-text
+      [hidden]="descriptionInput.valid || descriptionInput.pristine"
+      color="danger">
+      Error! Description must have at least 20 characters.
+    </ion-text>
+  </ion-item>
+
+  <!--Button for saving new post.
+  Fires off createPublication() function.
+  Disabled unless user inputs are valid.
+  Routes to home page-->
+  <ion-button 
+  (click)="createPublication()"
+  [disabled]="!titleInput.valid || !descriptionInput.valid || titleInput.pristine || descriptionInput.pristine"
+  [routerLink]="['/home']"
+  style="margin-top: 15px; margin-left: 15px; margin-bottom: 15px"
+  >Post</ion-button>
+
+</ion-card>

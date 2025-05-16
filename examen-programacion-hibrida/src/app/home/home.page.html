@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="text-align: center;">Posts</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!--Calls for publications.component.
+Receives onDelete event from child, calling deletePublication() function with parameter $event.
+Gives values of publications List to publicationList from child-->
+<ion-content [fullscreen]="true">
+ <app-publications (onDelete)="deletePublication($event)" [publicationsList]="publications"/>
+</ion-content>
+
+<!--Tabs for app's functions management.
+Currently only has an Add Post button which routes to publication.manager.page
+NOTE: Must be wrapped in an ion-toolbar, otherwise the interaction box of tabs will cover the whole screen and make app uninteractable-->
+<ion-toolbar>
+  <ion-tabs>
+    <ion-tab-bar  slot="bottom">
+      <ion-tab-button [routerLink]="['/publication-manager']">
+        <ion-icon name="add-circle"></ion-icon>
+        <ion-label>Add Post</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-toolbar>
