@@ -20,7 +20,7 @@ export class PublicationManagerComponent  implements OnInit {
   //Stores user input.
   title:string = ""
   image:string = ""
-  imageTaken:boolean = false
+  imageTaken:boolean = false //Manages visibility state of the image shown in screen in case it's been taken.
   description:string= ""
 
   //Instance of Publication which will be constructed with user inputs.
@@ -38,7 +38,7 @@ export class PublicationManagerComponent  implements OnInit {
   ngOnInit() {}
 
   //Fires off getPhoto() method from Camera plugin. 
-  //If the photo stored in base64image is not null or undefined, it will be assigned to the image property.
+  //If the photo stored in base64image is not null or undefined, it will be assigned to the image property and be shown on screen by changing value of imageTaken.
   async takePhoto() {
 	  const image = await Camera.getPhoto({
 	    quality: 90,
