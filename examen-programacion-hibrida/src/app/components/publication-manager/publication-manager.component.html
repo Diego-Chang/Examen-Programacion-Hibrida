@@ -29,7 +29,7 @@
         </ion-button>
       </ion-col>
       <ion-col>
-        <ion-img [src]="'data:image/jpeg;base64,' + image" style="height: 200px; width:auto"></ion-img>
+        <ion-img *ngIf="imageTaken" [src]="'data:image/jpeg;base64,' + image" style="height: 200px; width:auto"></ion-img>
       </ion-col>
     </ion-row>
   </ion-grid>

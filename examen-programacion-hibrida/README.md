@@ -1,0 +1,1 @@
+#Use "npm install --legacy-peer-deps" when installing node_modules.

@@ -6,19 +6,21 @@ import { Camera, CameraResultType } from '@capacitor/camera';
 import { addIcons } from 'ionicons';
 import { camera } from 'ionicons/icons';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-publication-manager-component',
   templateUrl: './publication-manager.component.html',
   styleUrls: ['./publication-manager.component.scss'],
   standalone: true,
-  imports: [IonIcon, IonCol, IonRow, IonGrid, IonImg, IonButton, IonText, IonCard, IonItem, IonInput, FormsModule, RouterLink]
+  imports: [IonIcon, IonCol, IonRow, IonGrid, IonImg, IonButton, IonText, IonCard, IonItem, IonInput, FormsModule, RouterLink, CommonModule]
 })
 export class PublicationManagerComponent  implements OnInit {
 
   //Stores user input.
   title:string = ""
   image:string = ""
+  imageTaken:boolean = false
   description:string= ""
 
   //Instance of Publication which will be constructed with user inputs.
@@ -47,6 +49,7 @@ export class PublicationManagerComponent  implements OnInit {
 	  const base64image = image.base64String
     if (base64image != null || base64image != undefined){
       this.image = base64image
+      this.imageTaken = true
     }
 	}
 
